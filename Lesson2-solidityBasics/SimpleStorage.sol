@@ -9,4 +9,24 @@ contract SimpleStorage {
     //bytes32 favNumberInIDK = "cat";
     //address myAddress = 0x788bAFda4D147f6e9686ad763414F7651d97Eb28;
     uint256 favouriteNumber;
+    struct People {
+        uint256 favouriteNumber;
+        string name;
+    }
+
+    People[] public people;
+    mapping(string => uint256) nameToFavouriteNumber;
+
+    function store(uint256 _favouriteNumber) public {
+        favouriteNumber = _favouriteNumber;
+    }
+
+    function retrieve() public view returns(uint256) {
+        return favouriteNumber;
+    }
+
+    function addPerson(uint256 _favouriteNumber, string memory _name) public {
+        people.push(People(_favouriteNumber, _name));
+        nameToFavouriteNumber[_name] = _favouriteNumber;
+    }
 }
